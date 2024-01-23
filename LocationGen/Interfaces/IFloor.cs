@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace LocationGen.Interfaces
 {
+    // Интерфейс структуры этажа
     internal interface IFloor
     {
         int FloorId { get; set; }

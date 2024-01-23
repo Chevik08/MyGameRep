@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace LocationGen
 {
+    // Интерфейс структуры комнат
     internal interface IRoom
     {
         int RoomId { get; set; }

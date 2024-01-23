@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace LocationGen.Enums
 {
+    // Ранняя версия типов этажа
     internal enum FloorTypes
     {
         Base

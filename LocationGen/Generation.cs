@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace LocationGen
 {
+    // Класс входной точки
     internal class Generation
     {
         static void Main(string[] args)

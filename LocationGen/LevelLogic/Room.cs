@@ -26,6 +26,13 @@ namespace LocationGen
         /// <param name="Style">
         /// Идентификатор стиля комнаты
         /// </param>
+        /// <param name="X">
+        /// Положение комнаты по горизонтали
+        /// </param>
+        /// <param name="Y">
+        /// Положение комнаты по вертикали
+        /// </param>
+         
         internal RoomTypes RoomType;
         internal int RoomId;
         internal bool Mandatory;
@@ -67,12 +74,13 @@ namespace LocationGen
 
 
         // Метод пересборки комнаты
+        // TODO: В будущем переделать
         void IRoom.Reroll()
         {
             throw new NotImplementedException();
         }
 
-        // Метод выврода экземпляра класса в виде строки
+        // Метод вывода экземпляра класса в виде строки
         public override string ToString()
         {
             return "Room \n{Id: " + RoomId + "\n" + "Type: " + RoomType + "\n" + 
@@ -80,6 +88,7 @@ namespace LocationGen
                 + "Floor: " + Floor + "\n}";
         }
 
+        // Хэширование для сравнения идентичных комнат
         public override int GetHashCode()
         {
             return ToString().GetHashCode();

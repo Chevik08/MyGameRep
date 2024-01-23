@@ -5,8 +5,36 @@ using LocationGen.Enums;
 
 namespace LocationGen
 {
+    // Класс этажа подземелья
     internal class Floor : IFloor
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="FloorId">
+        /// Идентификатор этажа
+        /// </param>
+        /// <param name="FloorNumber">
+        /// Номер этажа от 1 до 12
+        /// </param>
+        /// <param name="Style">
+        /// Идентификатор стилистики этажа
+        /// </param>
+        /// <param name="FloorType">
+        /// Тип этажа
+        /// </param>
+        /// <param name="map">
+        /// Коллекция всей карты
+        /// </param>
+        /// <param name="RoomPool">
+        /// Пул комнат, которые подвластны игроку
+        /// </param>
+        /// <param name="Size">
+        /// Длина и ширина всей карты
+        /// </param>
+        /// <param name="MandatoryNum">
+        /// Число обязательных для спавна комнат
+        /// </param>
         internal int FloorId;
         internal int FloorNumber;
         internal int Style;
@@ -16,11 +44,13 @@ namespace LocationGen
         internal const int Size = 13;
         internal const int MandatoryNum = 6;
 
+        // Геттеры и сеттеры
         int IFloor.FloorId { get { return FloorId; } set { FloorId = value; } }
         int IFloor.FloorNumber { get { return FloorNumber; } set { FloorNumber = value; } }
         int IFloor.Style { get { return Style; } set { Style = value; } }
         FloorTypes IFloor.FloorType { get { return FloorType; } set { FloorType = value; } }
 
+        // Пустой конструктор этажа
         public Floor()
         {
             FloorId = -1;
@@ -31,6 +61,7 @@ namespace LocationGen
             BuildMap();
         }
 
+        // Полный конструктор этажа
         public Floor(int floorId, int floorNumber, int style,
             FloorTypes floorType)
         {
@@ -61,11 +92,13 @@ namespace LocationGen
             }
         }
 
+        // Получение карты
         public List<IRoom> GetMap()
         {
             return map;
         }
 
+        // Метод вывода карты в консоль
         public void ShowMap()
         {
             // TODO: Убрать счётчик
@@ -224,6 +257,7 @@ namespace LocationGen
             {
                 RoomType = RoomTypes.Puzzle,
             };
+
             foreach (Room room in RoomPool)
             {
                 if (room.RoomType == RoomTypes.Empty)
@@ -238,11 +272,13 @@ namespace LocationGen
 
         }
 
+        // Получение расстояния между двумя комнатами
         double GetRange(Room loc1, Room loc2)
         {
             return Math.Sqrt(Math.Pow(loc1.X - loc2.X, 2) - Math.Pow(loc1.Y - loc2.Y, 2));
         }
 
+        // Вставка нужной комнаты в карту
         void SetRoom(int x, int y, Room room)
         {
             room.X = x;
@@ -250,11 +286,13 @@ namespace LocationGen
             map[(Size * y) + x] = room;
         }
 
+        // Получение комнаты из карты
         Room GetRoom(int x, int y)
         {
             return (Room)map[(Size * y) + x];
         }
 
+        // Перестройка этажа
         public void Rebuild()
         {
             throw new NotImplementedException();

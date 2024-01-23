@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace LocationGen.Enums
 {
+    // Перечень параметров для передвижения по карте
     internal enum Movements
     {
         UP = -1,
