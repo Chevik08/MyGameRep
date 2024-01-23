@@ -11,7 +11,8 @@ namespace LocationGen
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello world");
+            // Создаём базовый этаж 5 уровня
+            // Остальные параметры реализовывать рано
             Floor Floor = new Floor
             {
                 FloorId = 1,
@@ -19,8 +20,9 @@ namespace LocationGen
                 FloorType = FloorTypes.Base,
                 Style = 1
             };
-            Console.WriteLine(Floor.ToString());
+            // Генерируем этаж
             Floor.FloorGen();
+            // Выводим в консоль
             Floor.ShowMap();
             Console.ReadLine();
         }
