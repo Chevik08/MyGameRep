@@ -5,11 +5,10 @@ using LocationGen.Enums;
 
 namespace LocationGen
 {
-    // Класс этажа подземелья
     internal class Floor : IFloor
     {
         /// <summary>
-        /// 
+        /// Класс для создания этажа подземелья
         /// </summary>
         /// <param name="FloorId">
         /// Идентификатор этажа
@@ -137,6 +136,7 @@ namespace LocationGen
             int orig_w = Size / 2;
             int pred_h;
             int pred_w;
+            int loopChecker = 0;
             SetRoom(w, h, Spawn);
             // Создание комнат
             int roomCounter = 1;
@@ -182,6 +182,15 @@ namespace LocationGen
                         // Если комната уже занята, возвращаемся назад
                         w = pred_w;
                         h = pred_h;
+                        loopChecker++;
+                        // Если попали в угол карты и не можем выбраться
+                        if (loopChecker >= 100) 
+                        {
+                            loopChecker = 0;
+                            w = orig_w;
+                            h = orig_h;
+                            Console.WriteLine("Reroll");
+                        }
                     }
                 }
                 else
@@ -191,6 +200,8 @@ namespace LocationGen
                     h = orig_h;
                 }
             };
+            ShowMap();
+            Console.WriteLine();
             FloorFill(Spawn);
         }
 
@@ -204,6 +215,10 @@ namespace LocationGen
             Room Treasure = new Room
             {
                 RoomType = RoomTypes.Treasure,
+            };
+            Room Shop = new Room
+            {
+                RoomType = RoomTypes.Shop,
             };
             // Босс всегда находится с какого-то края карты
             List<Room> maxPool = new List<Room>
@@ -243,10 +258,17 @@ namespace LocationGen
             if (GetRoom(maxPool[0].X, maxPool[0].Y).RoomType == RoomTypes.Empty)
             {
                 SetRoom(maxPool[0].X, maxPool[0].Y, BossRoom);
+                maxPool[0].RoomType = RoomTypes.Boss;
             }
             if (GetRoom(maxPool[1].X, maxPool[1].Y).RoomType == RoomTypes.Empty)
             {
                 SetRoom(maxPool[1].X, maxPool[1].Y, Treasure);
+                maxPool[1].RoomType = RoomTypes.Treasure;
+            }
+            if (GetRoom(maxPool[2].X, maxPool[2].Y).RoomType == RoomTypes.Empty)
+            {
+                SetRoom(maxPool[2].X, maxPool[2].Y, Shop);
+                maxPool[2].RoomType = RoomTypes.Shop;
             }
             // Теперь создадим боевые комнаты (идентификаторами пренебречь)
             Room BattleRoom = new Room

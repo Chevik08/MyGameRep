@@ -17,7 +17,7 @@ namespace LocationGen
             Floor Floor = new Floor
             {
                 FloorId = 1,
-                FloorNumber = 5,
+                FloorNumber = 1,
                 FloorType = FloorTypes.Base,
                 Style = 1
             };
